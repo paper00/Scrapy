@@ -36,12 +36,12 @@ class PostypeSpiderSpider(scrapy.Spider):
         # Save to Item
         postypeItem = PostypeItem()
         postypeItem['post_category'] = response.xpath("//div[@class='container']//div[@class='post-category text-truncate']/a/text()").extract()
-        postypeItem['post_category'] = response.xpath("//div[@class='container']//div[@class='post-category']/a/text()").extract()
+        # postypeItem['post_category'] = response.xpath("//div[@class='container']//div[@class='post-category']/a/text()").extract()
         postypeItem['post_title'] = response.xpath("//div[@class='container']//h1[@class='post-title']/text()").extract()
-        postypeItem['post_title'] = response.xpath("//div[@class='container']//h1[@class='post-title']/span/text()").extract()
+        # postypeItem['post_title'] = response.xpath("//div[@class='container']//h1[@class='post-title']/span/text()").extract()
         postypeItem['post_subtitle'] = response.xpath("//div[@class='container']//div[@class='post-subtitle']/text()").extract()
         postypeItem['author'] = response.xpath("//div[@class='container']//div[@class='media-body']/h4/a/text()").extract()
-        postypeItem['author'] = response.xpath("//div[@class='container']//a[@class='list-inline-item']/text()").extract()
+        # postypeItem['author'] = response.xpath("//div[@class='container']//a[@class='list-inline-item']/text()").extract()
         postypeItem['post_content'] = response.xpath("//div[@class='container']//div[@id='post-content']").extract()
 
         print (postypeItem)
@@ -49,7 +49,7 @@ class PostypeSpiderSpider(scrapy.Spider):
 
         # Get next_link
         next_link = response.xpath("//div[@id='post-navbar']//div//ul/li/a[@class='btn-next-post btn btn-icon-text justify-content-md-end']/@href").extract()
-        next_link = response.xpath("//a[@class='btn-pager-next btn btn-icon-text justify-content-end post-bg-black']/@href").extract()
+        # next_link = response.xpath("//a[@class='btn-pager-next btn btn-icon-text justify-content-end post-bg-black']/@href").extract()
         if next_link:
             next_link = next_link[0]
             yield scrapy.Request(next_link, callback=self.parse, dont_filter=True)
